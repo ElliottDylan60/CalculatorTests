@@ -22,6 +22,7 @@ namespace CalculatorTests
         {
             // Create Graph
             Graph graph = new Graph();
+            #region AddingNodes
             Vertex Arithmetic = new Vertex("Arithmetic");
             Vertex Digit = new Vertex("Digit");
             Vertex UnaryMinus = new Vertex("Unary Minus");
@@ -30,7 +31,7 @@ namespace CalculatorTests
             Vertex CloseParenthesis = new Vertex(")");
             Vertex Empty = new Vertex("Empty");
             Vertex Decimal = new Vertex("Decimal");
-            #region Edges
+
             graph.addVertex(Arithmetic);
             graph.addVertex(Digit);
             graph.addVertex(UnaryMinus);
@@ -39,7 +40,8 @@ namespace CalculatorTests
             graph.addVertex(CloseParenthesis);
             graph.addVertex(Empty);
             graph.addVertex(Decimal);
-
+            #endregion
+            #region AddingEdges
             graph.addEdge(Arithmetic, Digit);
             graph.addEdge(Arithmetic, Functions);
             graph.addEdge(Arithmetic, OpenParenthesis);
@@ -61,7 +63,7 @@ namespace CalculatorTests
             graph.addEdge(Functions, UnaryMinus);
             graph.addEdge(Functions, Functions);
             graph.addEdge(Functions, OpenParenthesis);
-            #endregion
+
             graph.addEdge(OpenParenthesis, Digit);
             graph.addEdge(OpenParenthesis, CloseParenthesis);
             graph.addEdge(OpenParenthesis, Functions);
@@ -79,7 +81,7 @@ namespace CalculatorTests
             graph.addEdge(Empty, UnaryMinus);
 
             graph.addEdge(Decimal, Digit);
-
+            #endregion
             Console.WriteLine(graph);
 
         }
