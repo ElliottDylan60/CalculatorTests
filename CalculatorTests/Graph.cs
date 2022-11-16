@@ -30,12 +30,18 @@ namespace CalculatorTests
             foreach (KeyValuePair<Vertex, List<Vertex>> kvp in adjacent) {
                 output += kvp.Key.getLabel() + " --> ";
                 foreach(Vertex node in kvp.Value){
-                    output += node.getLabel() + " ";
+                    output += node.getLabel() + ",";
                 }
                 output += " \n";
             }
 
             return output;
+        }
+        public List<string> randomTraversal() {
+
+            List<string> visited = new List<string>();
+            
+            return new List<string>();
         }
     }
 }

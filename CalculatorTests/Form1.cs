@@ -13,6 +13,18 @@ namespace CalculatorTests
 {
     public partial class Form1 : Form
     {
+        // Global Variables
+        Graph graph;
+        Vertex Arithmetic = new Vertex("Arithmetic");
+        Vertex Digit = new Vertex("Digit");
+        Vertex UnaryMinus = new Vertex("Unary Minus");
+        Vertex Functions = new Vertex("Functions");
+        Vertex OpenParenthesis = new Vertex("(");
+        Vertex CloseParenthesis = new Vertex(")");
+        Vertex Empty = new Vertex("Empty");
+        Vertex Decimal = new Vertex("Decimal");
+        Vertex Done = new Vertex("Done");
+
         public Form1()
         {
             InitializeComponent();
@@ -20,17 +32,14 @@ namespace CalculatorTests
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            InitializeGraph();
+            Console.WriteLine(graph);
+        }
+        private void InitializeGraph() {
             // Create Graph
-            Graph graph = new Graph();
+            graph = new Graph();
             #region AddingNodes
-            Vertex Arithmetic = new Vertex("Arithmetic");
-            Vertex Digit = new Vertex("Digit");
-            Vertex UnaryMinus = new Vertex("Unary Minus");
-            Vertex Functions = new Vertex("Functions");
-            Vertex OpenParenthesis = new Vertex("(");
-            Vertex CloseParenthesis = new Vertex(")");
-            Vertex Empty = new Vertex("Empty");
-            Vertex Decimal = new Vertex("Decimal");
+            
 
             graph.addVertex(Arithmetic);
             graph.addVertex(Digit);
@@ -40,6 +49,7 @@ namespace CalculatorTests
             graph.addVertex(CloseParenthesis);
             graph.addVertex(Empty);
             graph.addVertex(Decimal);
+            graph.addVertex(Done);
             #endregion
             #region AddingEdges
             graph.addEdge(Arithmetic, Digit);
@@ -51,6 +61,7 @@ namespace CalculatorTests
             graph.addEdge(Digit, Arithmetic);
             graph.addEdge(Digit, Digit);
             graph.addEdge(Digit, Decimal);
+            graph.addEdge(Digit, Done);
 
             graph.addEdge(UnaryMinus, UnaryMinus);
             graph.addEdge(UnaryMinus, Digit);
@@ -73,17 +84,18 @@ namespace CalculatorTests
 
             graph.addEdge(CloseParenthesis, Digit);
             graph.addEdge(CloseParenthesis, Arithmetic);
+            graph.addEdge(CloseParenthesis, Done);
 
             graph.addEdge(Empty, Digit);
             graph.addEdge(Empty, Decimal);
             graph.addEdge(Empty, Functions);
             graph.addEdge(Empty, OpenParenthesis);
             graph.addEdge(Empty, UnaryMinus);
+            graph.addEdge(Empty, Done);
 
             graph.addEdge(Decimal, Digit);
             #endregion
-            Console.WriteLine(graph);
-
+            
         }
     }
 }
