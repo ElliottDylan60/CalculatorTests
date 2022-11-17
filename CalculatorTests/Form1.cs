@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using AngouriMath;
+using AngouriMath.Extensions;
 
 namespace CalculatorTests
 {
@@ -36,8 +37,13 @@ namespace CalculatorTests
         private void Form1_Load(object sender, EventArgs e)
         {
             InitializeGraph();
+
             
-            evaluateRandom(graph.randomTraversal(Empty));
+            for (int i = 0; i < 1000; i++) {
+                Entity expr = evaluateRandom(graph.randomTraversal(Empty));
+                Console.WriteLine(expr.EvalNumerical());
+            }
+            
         }
         private void InitializeGraph() {
             // Create Graph
@@ -153,7 +159,7 @@ namespace CalculatorTests
             #endregion
             
         }
-        private void evaluateRandom(List<string> equation) {
+        private string evaluateRandom(List<string> equation) {
             int numOpen = 0;
             int numClose = 0;
             string result = "";
@@ -199,10 +205,11 @@ namespace CalculatorTests
                 {
                     result += ")";
                     numClose++;
+                    continue;
                 }
                 break;
             }
-            Console.WriteLine(result);
+            return result;
 
         }
     }

@@ -44,7 +44,7 @@ namespace CalculatorTests
             return output;
         }
         public List<string> randomTraversal(Vertex root) {
-            Random random = new Random();
+            Random random = new Random(Guid.NewGuid().GetHashCode());
             List<string> visited = new List<string>();
             Vertex currentNode = root;
             string currentNodeValue = root.getLabel();
@@ -53,13 +53,13 @@ namespace CalculatorTests
 
             while (!currentNode.getLabel().Equals("Done")) {
                 Vertex previousNode = currentNode;
-                int randomIndex = random.Next(adjacent[currentNode].Count);
+                
 
                 // Traverse to new node
                 while (true) {
+                    int randomIndex = random.Next(adjacent[previousNode].Count);
                     currentNode = adjacent[previousNode][randomIndex];
                     currentNodeValue = currentNode.getLabel();
-                    visited.Add(currentNodeValue);
                     if (currentNode.getLabel().Equals(")")) // If the next node is a close parenthesis
                     {
                         if (totalOpen > totalClose) // make sure it is syntactically correct to add a close parenthesis
@@ -73,7 +73,7 @@ namespace CalculatorTests
                     }
                     break;
                 }
-                
+                visited.Add(currentNodeValue);
                 // Keep track of open parenthesis
                 switch (currentNodeValue) {
                     case "(":
